@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+            background: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background: #4cae4c;
+        }
+        .chat-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message .role {
+            font-weight: bold;
+        }
+        .message.user {
+            color: blue;
+        }
+        .message.assistant {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat History</h1>
+        <form method="post" action="/">
+            <div class="form-group">
+                <label for="lead_id">Lead ID:</label>
+                <input type="text" id="lead_id" name="lead_id" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Get Chat History">
+            </div>
+        </form>
+        {% if message_history %}
+        <div class="chat-box">
+            {% for message in message_history %}
+            <div class="message {{ message.role }}">
+                <div class="role">{{ message.role }}:</div>
+                <div class="content">{{ message.content }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
